@@ -37,3 +37,6 @@ class TradingBot:
             print(f"Бот работает... {time.ctime()}")
             time.sleep(5)  # Имитация работы
         print("Основная логика бота завершила работу.")
+
+
+1
