@@ -1,28 +1,38 @@
-
 from kivy.app import App
-from dotenv import load_dotenv
-import os
+from kivy.uix.boxlayout import BoxLayout
+from kivy.lang import Builder
 
-load_dotenv() # Загружает переменные из файла .env
+# Импортируем наш модуль конфигурации, чтобы переменные окружения загрузились при старте
+# Теперь мы импортируем его напрямую, так как он лежит в той же папке
+import config
 
-# Создаем класс нашего приложения, наследуясь от App
-class ScalpExApp(App):
-    # Теперь метод build() может быть пустым.
-    # Kivy автоматически загрузит файл scalpex.kv и использует его
-    # как корневой виджет.
+# Просто для демонстрации, что мы можем получить доступ к конфигу из любой точки программы
+print(f"Загружен API ключ: {'Да' if config.BINANCE_API_KEY else 'Нет'}")
+
+# Загружаем KV-файл для дизайна интерфейса
+Builder.load_file('main_screen.kv')
+
+
+class MainWidget(BoxLayout):
+    """Главный виджет, чья структура описана в main_screen.kv"""
+    pass
+
+
+class ScalpEXApp(App):
+    """Основной класс приложения Kivy"""
     def build(self):
-        pass # Kivy загрузит scalpex.kv
+        return MainWidget()
 
-    def handle_button_press(self):
-        # self.root дает доступ к корневому виджету (нашему BoxLayout)
-        # self.root.ids дает доступ ко всем виджетам внутри, у которых есть id        
-        info_label = self.root.ids.info_label # Находим виджет по его id
-        api_key = os.getenv("API_KEY", "Ключ не найден") # Безопасно получаем ключ
-        
-        print(f"Загружен API ключ: {api_key}")
-        info_label.text = "Отлично! Текст изменен из Python!"
+    def start_bot(self):
+        print("Логика запуска бота будет здесь...")
+        self.root.ids.status_label.text = "Статус: Работает"
+        # В будущем здесь будет вызов основной логики
 
-# Стандартная точка входа в Python-скрипт
+    def stop_bot(self):
+        print("Логика остановки бота будет здесь...")
+        self.root.ids.status_label.text = "Статус: Остановлен"
+        # В будущем здесь будет вызов основной логики
+
+
 if __name__ == '__main__':
-    # Создаем экземпляр нашего приложения и запускаем его
-    ScalpExApp().run()
+    ScalpEXApp().run()

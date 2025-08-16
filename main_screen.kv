@@ -1,0 +1,26 @@
+<MainWidget>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    Label:
+        text: 'Добро пожаловать в ScalpEX!'
+        font_size: '24sp'
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    Button:
+        text: 'Запустить бота'
+        size_hint_y: None
+        height: '48dp'
+        on_press: app.start_bot()
+
+    Button:
+        text: 'Остановить бота'
+        size_hint_y: None
+        height: '48dp'
+        on_press: app.stop_bot()
+
+    Label:
+        id: status_label
+        text: 'Статус: Остановлен'

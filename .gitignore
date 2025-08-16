@@ -1,28 +1,23 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 
-# PyInstaller
-dist/
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
 build/
-*.spec
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
 
-# Kivy
-.kivy/
-
-# Poetry
+# Virtual environment
+venv/
 .venv/
 
-# Virtual Environments
-venv/
-env/
-
-# IDE / Editor specific
-.vscode/
-.idea/
-
-# Secrets file
+# Файл с секретами
 .env
-
