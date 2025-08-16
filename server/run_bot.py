@@ -1,3 +1,7 @@
+"""
+Основной файл для запуска веб-сервера (API) на FastAPI.
+"""
+
 import uvicorn
 from fastapi import FastAPI
 
@@ -24,7 +28,7 @@ async def read_root():
 async def start_bot():
     """Запускает торговую логику бота."""
     print("SERVER: Получена команда на запуск бота.")
-    await bot.start()
+    bot.start()
     return {"status": "ok", "message": "Bot started successfully"}
 
 
@@ -32,7 +36,7 @@ async def start_bot():
 async def stop_bot():
     """Останавливает торговую логику бота."""
     print("SERVER: Получена команда на остановку бота.")
-    await bot.stop()
+    bot.stop()
     return {"status": "ok", "message": "Bot stopped successfully"}
 
 

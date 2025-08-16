@@ -6,3 +6,4 @@ uvicorn[standard] # ASGI сервер для запуска FastAPI
 httpx          # Асинхронный HTTP-клиент (замена requests)
 redis[hiredis] # Асинхронный драйвер для Redis
 asyncpg        # Асинхронный драйвер для PostgreSQL
+loguru         # Удобная и мощная библиотека для логирования

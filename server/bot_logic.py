@@ -1,3 +1,7 @@
+"""
+Основной модуль, содержащий бизнес-логику торгового бота.
+"""
+
 import asyncio
 
 
@@ -8,11 +12,12 @@ class TradingBot:
     """
 
     def __init__(self):
+        """Инициализирует экземпляр торгового бота."""
         self._is_running: bool = False
         self._main_task: asyncio.Task | None = None
         print("TradingBot instance created.")
 
-    async def start(self):
+    def start(self):
         if self._is_running:
             print("BOT_LOGIC: Bot is already running.")
             return
@@ -21,7 +26,7 @@ class TradingBot:
         self._main_task = asyncio.create_task(self._run_logic())
         print("BOT_LOGIC: Bot has been started.")
 
-    async def stop(self):
+    def stop(self):
         if not self._is_running or not self._main_task:
             print("BOT_LOGIC: Bot is not running.")
             return

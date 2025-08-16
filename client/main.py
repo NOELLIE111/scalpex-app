@@ -1,3 +1,7 @@
+"""
+Основной файл клиентского GUI-приложения на Kivy.
+"""
+
 import threading
 
 import requests
@@ -20,10 +24,12 @@ class ScalpEXApp(App):
     """Основной класс приложения Kivy (клиент)"""
 
     def __init__(self, **kwargs):
+        """Инициализирует приложение и задает URL сервера."""
         super().__init__(**kwargs)
         self.server_url = "http://127.0.0.1:8000"
 
     def build(self):
+        """Создает и возвращает корневой виджет приложения."""
         return MainWidget()
 
     def send_request(self, endpoint):
