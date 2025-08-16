@@ -4,23 +4,23 @@
     spacing: 10
 
     Label:
-        text: 'Добро пожаловать в ScalpEX!'
+        text: 'Пульт управления ScalpEX'
         font_size: '24sp'
         size_hint_y: None
         height: self.texture_size[1]
 
     Button:
-        text: 'Запустить бота'
+        text: 'Запустить бота на сервере'
         size_hint_y: None
         height: '48dp'
         on_press: app.start_bot()
 
     Button:
-        text: 'Остановить бота'
+        text: 'Остановить бота на сервере'
         size_hint_y: None
         height: '48dp'
         on_press: app.stop_bot()
 
     Label:
         id: status_label
-        text: 'Статус: Остановлен'
+        text: 'Статус: Неизвестен'
