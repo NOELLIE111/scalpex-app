@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "scalpex-app"
+version = "0.1.0"
+description = "Cross-platform trading application"
+authors = ["Kirill <kirovec007@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+kivy = "^2.3.0"
+
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^6.9.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
