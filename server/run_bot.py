@@ -2,11 +2,25 @@
 Основной файл для запуска веб-сервера (API) на FastAPI.
 """
 
+# Стандартные и сторонние импорты
 import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
+from loguru import logger
 
-# Импортируем класс нашего бота
+# Импорты из нашего приложения
 from bot_logic import TradingBot
+from managers.loguru_manager import setup_logger
+
+# --- Настройка и запуск ---
+# Функции настройки должны вызываться после всех импортов,
+# но до инициализации компонентов, которые от них зависят.
+
+setup_logger()
+
+# Загружаем переменные окружения из .env файла в самом начале.
+# Это нужно сделать до импорта других наших модулей, которые могут их использовать.
+load_dotenv()
 
 app = FastAPI(
     title="ScalpEX Trading Bot API",
@@ -24,20 +38,36 @@ async def read_root():
     return {"status": "ok", "message": "ScalpEX Bot Server is running"}
 
 
-@app.post("/api/start")
-async def start_bot():
-    """Запускает торговую логику бота."""
-    print("SERVER: Получена команда на запуск бота.")
-    bot.start()
-    return {"status": "ok", "message": "Bot started successfully"}
+@app.get("/api/pairs")
+async def get_configured_pairs():
+    """Возвращает список торговых пар, настроенных на сервере."""
+    return {"pairs": bot.trading_pairs}
 
 
-@app.post("/api/stop")
-async def stop_bot():
-    """Останавливает торговую логику бота."""
-    print("SERVER: Получена команда на остановку бота.")
-    bot.stop()
-    return {"status": "ok", "message": "Bot stopped successfully"}
+@app.get("/api/status")
+async def get_bot_status():
+    """Возвращает текущий статус работы бота по всем парам."""
+    return bot.get_status()
+
+
+@app.post("/api/pairs/{pair_symbol}/start")
+async def start_bot_for_pair(pair_symbol: str):
+    """Запускает торговую логику для указанной пары."""
+    logger.info(f"Received a command to start the bot for {pair_symbol}.")
+    try:
+        bot.start_for_pair(pair_symbol.upper())
+        return {"status": "ok", "message": f"Bot started for {pair_symbol}"}
+    except ValueError as e:
+        logger.error(f"Failed to start bot for {pair_symbol}: {e}")
+        return {"status": "error", "message": str(e)}
+
+
+@app.post("/api/pairs/{pair_symbol}/stop")
+async def stop_bot_for_pair(pair_symbol: str):
+    """Останавливает торговую логику для указанной пары."""
+    logger.info(f"Received a command to stop the bot for {pair_symbol}.")
+    bot.stop_for_pair(pair_symbol.upper())
+    return {"status": "ok", "message": f"Bot stopped for {pair_symbol}"}
 
 
 if __name__ == "__main__":

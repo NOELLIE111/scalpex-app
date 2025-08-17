@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.pyd
 
 # Distribution / packaging
 .Python
@@ -14,18 +15,23 @@ dist/
 downloads/
 eggs/
 .eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Virtual environment
-venv/
-.venv/
+# PyInstaller
+*.spec
 
-# Файл с секретами
+# Virtual Environments
 .env
+venv/
 
-# Локальные базы данных
-*.db
-*.sqlite
-*.sqlite3
-
-# Лог-файлы
+# Log files
+logs/
 *.log
