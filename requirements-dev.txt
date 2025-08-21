@@ -4,3 +4,6 @@ pytest # Для написания тестов
 pre-commit # Для запуска хуков перед коммитом
 pyinstaller # Для сборки .exe
 pyinstaller-hooks-contrib # Помощник для сборки Kivy-приложений
+# Библиотеки, необходимые только для разработки
+watchdog    # Для горячей перезагрузки KivyMD
+buildozer

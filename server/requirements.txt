@@ -1,9 +1,0 @@
-python-dotenv  # Для чтения секретов из .env файла
-fastapi        # Современный веб-фреймворк для API
-uvicorn[standard] # ASGI сервер для запуска FastAPI
-
-# Асинхронные драйверы
-httpx          # Асинхронный HTTP-клиент (замена requests)
-redis[hiredis] # Асинхронный драйвер для Redis
-asyncpg        # Асинхронный драйвер для PostgreSQL
-loguru         # Удобная и мощная библиотека для логирования

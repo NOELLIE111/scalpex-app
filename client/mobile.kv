@@ -1,0 +1,52 @@
+<PairWidget>:
+    pair_symbol: ""
+    adaptive_height: True
+    padding: "12dp"
+    spacing: "12dp"
+
+    MDIcon:
+        icon: "chart-timeline-variant"
+        size_hint_x: None
+        width: "32dp"
+
+    MDLabel:
+        text: root.pair_symbol
+        adaptive_height: True
+
+    MDLabel:
+        id: pair_status_label
+        text: "Unknown"
+        halign: "center"
+        adaptive_height: True
+
+    MDIconButton:
+        id: start_button
+        icon: "play-circle-outline"
+        on_press: app.start_bot_for_pair(root.pair_symbol)
+
+    MDIconButton:
+        id: stop_button
+        icon: "stop-circle-outline"
+        on_press: app.stop_bot_for_pair(root.pair_symbol)
+
+
+<MainWidget>:
+    orientation: 'vertical'
+
+    MDTopAppBar:
+        title: "ScalpEX Mobile"
+
+    ScrollView:
+        MDList:
+            id: pairs_layout
+
+    MDBoxLayout:
+        adaptive_height: True
+        padding: "8dp"
+        md_bg_color: app.theme_cls.primaryContainerColor
+
+        MDLabel:
+            id: main_status_label
+            text: "Initializing..."
+            halign: "center"
+            text_color: app.theme_cls.onPrimaryContainerColor

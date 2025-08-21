@@ -1,6 +1,17 @@
 #!/bin/bash
-echo "Starting ScalpEX Development Environment..."
+
+# Определяем абсолютный путь к директории, где находится скрипт
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# Переходим в корневую директорию проекта (на один уровень выше папки scripts)
+PROJECT_ROOT="$SCRIPT_DIR/.."
+cd "$PROJECT_ROOT"
+
+echo "Starting ScalpEX Development Environment from project root: $PROJECT_ROOT"
 echo "Logs from both processes will be mixed in this terminal."
+
+# Активируем виртуальное окружение. Это ключ к решению проблемы!
+echo "Activating virtual environment..."
+source ./venv/bin/activate
 
 # Эта функция будет вызвана при нажатии Ctrl+C
 cleanup() {
@@ -14,11 +25,11 @@ cleanup() {
 trap cleanup INT
 
 # Запускаем сервер в фоновом режиме
-python server/run_bot.py &
+python -m server.run_bot &
 SERVER_PID=$!
 
 # Запускаем клиент в фоновом режиме
-python client/main.py &
+python -m client.main &
 CLIENT_PID=$!
 
 # Ожидаем завершения обоих фоновых процессов

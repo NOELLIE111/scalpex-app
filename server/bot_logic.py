@@ -4,6 +4,8 @@
 
 import asyncio
 import os
+
+from shared.enums import BotStatus
 from loguru import logger
 
 
@@ -78,5 +80,7 @@ class TradingBot:
         status = {}
         for pair in self.trading_pairs:
             task = self._pair_tasks.get(pair)
-            status[pair] = "Running" if task and not task.done() else "Stopped"
+            status[pair] = (
+                BotStatus.RUNNING if task and not task.done() else BotStatus.STOPPED
+            )
         return status
